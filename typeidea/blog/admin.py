@@ -5,6 +5,8 @@ from django.utils.html import format_html
 from .models import Post
 from .models import Category
 from .models import Tag
+from .adminforms import PostAdminForm
+from typeidea.custom_site import custom_site
 
 
 @admin.register(Category)
@@ -48,7 +50,8 @@ class CategoryOwnerFilter(admin.SimpleListFilter):
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ("title", "category", "status", "created_time", "owner","operator")
+    form = PostAdminForm
+    list_display = ("title", "category", "status", "created_time", "owner", "operator")
     list_display_links = []
     # list_filter = ["category"]
     list_filter = [CategoryOwnerFilter]
@@ -59,7 +62,35 @@ class PostAdmin(admin.ModelAdmin):
 
     # save_on_top = True
 
-    fields = ("category", "title", "desc", "status", "content", "tag")
+    exclude = ("owner",)
+
+    # fields = ("category", "title", "desc", "status", "content", "tag")
+
+    fieldsets = (
+        (
+            "基础配置", {
+                "description": "基础配置描述",
+                "fields": (
+                    ("title", "category"),
+                    "status"
+                )
+            }
+        ),
+        (
+            "内容", {
+                "fields": (
+                    "desc",
+                    "content"
+                )
+            }
+        ),
+        (
+            "额外信息", {
+                "classes": ("collapse",),
+                "fields": ("tag",)
+            }
+        )
+    )
 
     def operator(self, obj):
         return format_html(
