@@ -97,7 +97,6 @@ class PostAdmin(admin.ModelAdmin):
             '<a href="{}">编辑</a>',
             reverse('admin:blog_post_change', args=(obj.id,))
         )
-
     operator.short_description = "操作"
 
     def save_model(self, request, obj, form, change):
