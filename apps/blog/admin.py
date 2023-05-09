@@ -6,7 +6,6 @@ from .models import Post
 from .models import Category
 from .models import Tag
 from .adminforms import PostAdminForm
-from typeidea.custom_site import custom_site
 
 
 @admin.register(Category)

@@ -16,8 +16,8 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
-from blog.views import post_list, post_detail
-from config.views import links
+from apps.blog.views import post_list, post_detail
+from apps.config.views import links
 
 urlpatterns = [
     url(r"^$", post_list),
