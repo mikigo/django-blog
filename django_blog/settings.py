@@ -27,7 +27,7 @@ DEBUG = True
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'youqu.db'),
+        'NAME': os.path.join(BASE_DIR, 'static/db.sqlite3'),
     }
 }
 
@@ -36,7 +36,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    "youqu_blog",
+    "django_blog",
     "apps.blog",
     "apps.config",
     "apps.comment",
@@ -62,7 +62,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'youqu_blog.urls'
+ROOT_URLCONF = 'django_blog.urls'
 
 TEMPLATES = [
     {
@@ -80,7 +80,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'youqu_blog.wsgi.application'
+WSGI_APPLICATION = 'django_blog.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
