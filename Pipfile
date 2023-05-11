@@ -11,6 +11,7 @@ name = "pypidouban"
 [packages]
 django = "*"
 django-simpleui = "*"
+djangorestframework = "*"
 
 [dev-packages]
 
