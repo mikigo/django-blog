@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 from pathlib import Path
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = Path(__file__).parent.parent
 
@@ -23,6 +24,8 @@ SECRET_KEY = '%=wx)hfh(xgo_)d^2%#+s!vjre(o8h7*d*s(oz)ij8dveeen5u'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+
+PROJECT_NAME = "django-blog"
 
 DATABASES = {
     'default': {
@@ -80,6 +83,10 @@ TEMPLATES = [
     },
 ]
 
+STATICFILES_DIRS = [
+     os.path.join(BASE_DIR, "static"),
+ ]
+
 WSGI_APPLICATION = 'django_blog.wsgi.application'
 
 # Database
@@ -122,3 +129,27 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# ====== SIMPLEUI =========
+
+SIMPLEUI_LOGO = ""
+
+# 隐藏右侧SimpleUI广告链接和使用分析
+SIMPLEUI_ANALYSIS = False
+
+SIMPLEUI_CONFIG = {
+    "menu_display": [
+        "博客",
+        "评论",
+        "配置",
+        "认证和授权",
+    ]
+}
+# 最近动作
+SIMPLEUI_HOME_ACTION = False
+# 快速操作
+SIMPLEUI_HOME_QUICK = False
+# 服务器信息
+SIMPLEUI_HOME_INFO = False
+# 默认主题
+# SIMPLEUI_DEFAULT_THEME = 'admin.lte.css'

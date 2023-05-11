@@ -1,12 +1,18 @@
-# TypeIdea
+# django-blog
+
+使用 Django REST framework 构建的博客系统。
+
+# 安装
+
+系统环境：deepin-20.9
 
 ```shell
-sudo apt install python3-venv
-python3 -m venv typeidea-env
-source bin/activate
-
-pip install requirements.txt
+sudo apt install python3-pip
+sudo pip3 install pipenv
+pipenv install
 ```
+
+
 
 
 

@@ -26,6 +26,5 @@ urlpatterns = [
     url(r"^post/(?P<post_id>\d+)/$", post_detail),
     url(r"links/$", links),
 
-
     url(r'^admin/', admin.site.urls),
 ]
