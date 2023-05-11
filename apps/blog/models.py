@@ -18,7 +18,7 @@ class Category(models.Model):
 
     class Meta:
         verbose_name = verbose_name_plural = "分类"
-
+    # admin 文案
     def __str__(self):
         return self.name
 
