@@ -111,6 +111,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
@@ -148,7 +150,7 @@ SIMPLEUI_CONFIG = {
 # 最近动作
 SIMPLEUI_HOME_ACTION = False
 # 快速操作
-SIMPLEUI_HOME_QUICK = False
+SIMPLEUI_HOME_QUICK = True
 # 服务器信息
 SIMPLEUI_HOME_INFO = False
 # 默认主题

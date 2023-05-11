@@ -6,9 +6,8 @@ from .models import Link
 from .models import SideBar
 
 
-admin.site.site_header = f'{settings.PROJECT_NAME}管理后台'  # 设置header
-admin.site.site_title = f'{settings.PROJECT_NAME}管理后台'   # 设置title
-admin.site.index_title = f'{settings.PROJECT_NAME}管理后台'
+admin.site.site_header = settings.PROJECT_NAME.title()
+admin.site.site_title = settings.PROJECT_NAME.title()
 
 @admin.register(Link)
 class LinkAdmin(admin.ModelAdmin):
