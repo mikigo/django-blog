@@ -7,7 +7,7 @@ from .models import SideBar
 
 # simpleui的配置
 admin.site.site_header = settings.PROJECT_NAME.title()
-admin.site.site_title = settings.PROJECT_NAME.title()
+admin.site.site_title = settings.PROJECT_NAME.title() + "后台管理"
 
 @admin.register(Link)
 class LinkAdmin(admin.ModelAdmin):
