@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView
-
+from django.conf import settings
 # Create your views here.
 from apps.blog.models import Tag, Post, Category
 from apps.comment.models import Comment
@@ -77,6 +77,14 @@ class CommonMixin:
             'recently_comments': recently_comments,
             'recently_posts': recently_posts,
         })
+        if settings.HOME_TITLE:
+            kwargs.update({
+                "home_title": settings.HOME_TITLE
+            })
+        if settings.POWER_BY:
+            kwargs.update({
+                "power_by": settings.POWER_BY
+            })
         kwargs.update(self.get_category_context())
         return super(CommonMixin, self).get_context_data(**kwargs)
 
@@ -117,9 +125,9 @@ class TagView(BasePostsView):
 
 class PostDetail(CommonMixin, DetailView):
     # queryset = Post.latest_posts()
-    # template_name = "blog/detail.html"
-    # context_object_name = "post"
-    # pk_url_kwarg = "post_id"
     model = Post
-    template_name = 'blog/detail.html'
-    context_object_name = 'post'
+    template_name = "blog/detail.html"
+    context_object_name = "post"
+    pk_url_kwarg = "post_id"
+
+

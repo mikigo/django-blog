@@ -58,8 +58,12 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'django_blog.urls'
-
+# 主题
 THEME = "default"
+# 首页title
+HOME_TITLE = "django-blog".title()
+# 页面底部 POWER_BY xxx
+POWER_BY = ""
 
 TEMPLATES = [
     {
@@ -78,8 +82,8 @@ TEMPLATES = [
 ]
 
 STATICFILES_DIRS = [
-     os.path.join(BASE_DIR, "themes", THEME, "static"),
- ]
+    os.path.join(BASE_DIR, "themes", THEME, "static"),
+]
 
 WSGI_APPLICATION = 'django_blog.wsgi.application'
 
