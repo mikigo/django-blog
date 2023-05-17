@@ -1,4 +1,4 @@
-"""typeidea URL Configuration
+"""Django Blog URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.11/topics/http/urls/
@@ -18,13 +18,13 @@ from django.contrib import admin
 
 # from apps.blog.views import post_list, post_detail
 from apps.config.views import links
-from apps.blog.views import IndexView, CategoryView, TagView, PostDetailView
+from apps.blog.views import IndexView, CategoryView, TagView, PostDetail
 
 urlpatterns = [
     url(r"^$", IndexView.as_view(), name="index"),
-    url(r"^category/(?P<category_id>\d+)/$", CategoryView.as_view(), name="category-list"),
-    url(r"^tag/(?P<tag_id>\d+)/$", TagView.as_view(), name="tag-list"),
-    url(r"^post/(?P<post_id>\d+).html$", PostDetailView.as_view(), name="post-detail"),
+    url(r"^category/(?P<category_id>\d+)/$", CategoryView.as_view(), name="category"),
+    url(r"^tag/(?P<tag_id>\d+)/$", TagView.as_view(), name="tag"),
+    url(r"^post/(?P<post_id>\d+).html$", PostDetail.as_view(), name="detail"),
     url(r"links/$", links, name="links"),
 
     url(r'^admin/', admin.site.urls, name="admin"),
