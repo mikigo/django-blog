@@ -17,15 +17,18 @@ from django.conf.urls import url
 from django.contrib import admin
 
 # from apps.blog.views import post_list, post_detail
-from apps.config.views import links
-from apps.blog.views import IndexView, CategoryView, TagView, PostDetail
+
+from apps.blog.views import IndexView, CategoryView, TagView, PostDetail, SearchView, AuthorView
+from apps.config.views import LinkListView
 
 urlpatterns = [
     url(r"^$", IndexView.as_view(), name="index"),
     url(r"^category/(?P<category_id>\d+)/$", CategoryView.as_view(), name="category"),
     url(r"^tag/(?P<tag_id>\d+)/$", TagView.as_view(), name="tag"),
     url(r"^post/(?P<post_id>\d+).html$", PostDetail.as_view(), name="detail"),
-    url(r"links/$", links, name="links"),
+    url(r"^search/$", SearchView.as_view(), name="search"),
+    url(r"^author/(?P<owner_id>\d+)/$", AuthorView.as_view(), name="author"),
+    url(r"links/$", LinkListView.as_view(), name="links"),
 
     url(r'^admin/', admin.site.urls, name="admin"),
 ]

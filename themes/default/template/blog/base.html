@@ -9,6 +9,7 @@
     {% endif %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}"/>
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
 </head>
@@ -24,7 +25,7 @@
                         <a class="logo" href="/">Django Blog</a>
                     {% endif %}
                     <a class="index" href="/">首页</a>
-{#                    遍历所有的分类#}
+                    {#                    遍历所有的分类#}
                     {% for cate in nav_cates %}
                         <a class="link" href="{% url 'category' cate.id %}">{{ cate.name }}</a>
                     {% endfor %}
@@ -32,10 +33,20 @@
             </div>
             <div class="col-3">
                 <div class="input-group search">
-                    <input type="text" class="form-control" placeholder="搜索" aria-label="Search for...">
-                    <span class="input-group-btn">
-                            <button class="btn btn-secondary" type="button">Go</button>
+                    <form class="form-inline" action="/search/" method="GET">
+                        <input
+                                type="text"
+                                class="form-control"
+                                placeholder="输入搜索内容"
+{#                                aria-label="输入搜索内容"#}
+                                value="{{ keyword }}"
+                                name="keyword"
+                        >
+                        <span class="input-group-btn">
+                            <button class="btn btn-outline-success" type="submit">搜索</button>
                         </span>
+                    </form>
+
                 </div>
             </div>
         </div>

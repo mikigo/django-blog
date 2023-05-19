@@ -1,6 +1,7 @@
-from django.shortcuts import get_object_or_404
-from django.views.generic import ListView, DetailView
 from django.conf import settings
+from django.db.models import Q
+from django.views.generic import ListView, DetailView
+
 # Create your views here.
 from apps.blog.models import Tag, Post, Category
 from apps.comment.models import Comment
@@ -131,3 +132,26 @@ class PostDetail(CommonMixin, DetailView):
     pk_url_kwarg = "post_id"
 
 
+class SearchView(IndexView):
+
+    def get_context_data(self):
+        context = super().get_context_data()
+        context.update({
+            "keyword": self.request.GET.get("keyword", "")
+        })
+        return context
+
+    def get_queryset(self):
+        queryseet = super().get_queryset()
+        keyword = self.request.GET.get("keyword")
+        if not keyword:
+            return queryseet
+        return queryseet.filter(Q(title__icontains=keyword) | Q(desc__icontains=keyword))
+
+
+class AuthorView(IndexView):
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        author_id = self.kwargs.get("owner_id")
+        return queryset.filter(owner_id=author_id)

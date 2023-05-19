@@ -12,6 +12,7 @@ name = "pypidouban"
 django = "*"
 django-simpleui = "*"
 djangorestframework = "*"
+mistune = "*"
 
 [dev-packages]
 
