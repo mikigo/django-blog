@@ -1,3 +1,4 @@
+import mistune
 from django.conf import settings
 from django.db.models import Q
 from django.views.generic import ListView, DetailView
@@ -125,7 +126,6 @@ class TagView(BasePostsView):
         return posts
 
 
-
 class PostDetail(CommonMixin, DetailView):
     # queryset = Post.latest_posts()
     model = Post
@@ -134,12 +134,14 @@ class PostDetail(CommonMixin, DetailView):
     pk_url_kwarg = "post_id"
 
     def get_context_data(self, **kwargs):
-        """在detail.html末班中拿到comment_form和comment_list变量"""
+        """在detail.html模板中拿到comment_form和comment_list变量"""
         context = super().get_context_data()
         context.update({
             "comment_form": CommentForm,
             "comment_list": Comment.get_by_target(self.request.path)
         })
+        # 转换为markdown
+        context["post"].content = mistune.markdown(context["post"].content)
         return context
 
 

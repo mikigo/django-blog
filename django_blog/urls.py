@@ -16,11 +16,11 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
-# from apps.blog.views import post_list, post_detail
-
 from apps.blog.views import IndexView, CategoryView, TagView, PostDetail, SearchView, AuthorView
 from apps.comment.views import CommentView
 from apps.config.views import LinkListView
+
+# from apps.blog.views import post_list, post_detail
 
 urlpatterns = [
     url(r"^$", IndexView.as_view(), name="index"),

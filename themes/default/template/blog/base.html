@@ -1,6 +1,9 @@
 {% load static %}
 <!doctype html>
 <html lang="en">
+{% block extra_head %}
+{% endblock %}
+
 <head>
     {% if home_title %}
         <title>{{ home_title }}</title>
@@ -38,7 +41,7 @@
                                 type="text"
                                 class="form-control"
                                 placeholder="输入搜索内容"
-{#                                aria-label="输入搜索内容"#}
+                                {#                                aria-label="输入搜索内容"#}
                                 value="{{ keyword }}"
                                 name="keyword"
                         >

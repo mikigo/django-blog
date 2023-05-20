@@ -1,5 +1,5 @@
-from django.contrib import admin
 from django.conf import settings
+from django.contrib import admin
 
 # Register your models here.
 from .models import Link
@@ -9,6 +9,7 @@ from .models import SideBar
 admin.site.site_header = settings.PROJECT_NAME.title()
 admin.site.site_title = settings.PROJECT_NAME.title() + "后台管理"
 
+
 @admin.register(Link)
 class LinkAdmin(admin.ModelAdmin):
     list_display = ("title", "href", "status", "weight", "created_time")
@@ -17,6 +18,7 @@ class LinkAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
         obj.owner = request.user
         return super().save_model(request, obj, form, change)
+
 
 @admin.register(SideBar)
 class SideBarAdmin(admin.ModelAdmin):
