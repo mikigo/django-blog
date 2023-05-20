@@ -2,31 +2,58 @@
 
 {% block content %}
 
-<nav aria-label="breadcrumb" role="navigation">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/">首页</a></li>
-        <li class="breadcrumb-item"><a href="{% url 'category' post.category.id %}">{{ post.category.name }}</a></li>
-        <li class="breadcrumb-item active" aria-current="page">正文</li>
-    </ol>
-</nav>
+    <nav aria-label="breadcrumb" role="navigation">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">首页</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'category' post.category.id %}">{{ post.category.name }}</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">正文</li>
+        </ol>
+    </nav>
 
-<div class="post-element">
-    <h3 class="post-element-title">
-        {{ post.title }}
-    </h3>
-    <div>
-        <nav class="nav">
-            分类:<a class="nav-link post-element-nav" href="{% url 'category' post.category_id %}">{{ post.category.name }}</a>
-            标签:
-            <a class="nav-link post-element-nav" href="#">
-                {% for tag in post.tags.all %} {{ tag.name }}{% endfor %}
-            </a>
-            作者:<a class="nav-link post-element-nav" href="#">{{ post.owner.username }}</a>
-            创建时间:<a class="nav-link post-element-nav" href="#">{{ post.created_time }}</a>
-        </nav>
+    <div class="post-element">
+        <h3 class="post-element-title">
+            {{ post.title }}
+        </h3>
+        <div>
+            <nav class="nav">
+                分类:<a class="nav-link post-element-nav"
+                      href="{% url 'category' post.category_id %}">{{ post.category.name }}</a>
+                标签:
+                <a class="nav-link post-element-nav" href="#">
+                    {% for tag in post.tags.all %} {{ tag.name }}{% endfor %}
+                </a>
+                作者:<a class="nav-link post-element-nav" href="#">{{ post.owner.username }}</a>
+                创建时间:<a class="nav-link post-element-nav" href="#">{{ post.created_time }}</a>
+            </nav>
+        </div>
+        <article class="content">
+            {{ post.content }}
+        </article>
     </div>
-    <article class="content">
-        {{ post.content }}
-    </article>
-</div>
+    {#评论#}
+    <hr/>
+    <div class="comment">
+        <form class="form-group" action="/comment/" method="POST">
+            {% csrf_token %}
+            <input name="target" type="hidden" value="{{ request.path }}">
+            {{ comment_form }}
+        </form>
+{#        <! -- 评论列表 -->#}
+        <ul class="list-group">
+            {% for comment in comment_list %}
+                <li class="list-group-item">
+                    <div class="nickname">
+                        <a href="{{ comment.wibsite }}">{{ comment.nickname }}</a>
+                        <span>{{ comment.created_time }}</span>
+                    </div>
+                    <div class="comment-content">
+                        {{ comment.content }}
+                    </div>
+
+                </li>
+            {% endfor %}
+
+        </ul>
+    </div>
 {% endblock %}

@@ -4,6 +4,7 @@ from django.views.generic import ListView, DetailView
 
 # Create your views here.
 from apps.blog.models import Tag, Post, Category
+from apps.comment.forms import CommentForm
 from apps.comment.models import Comment
 from apps.config.models import SideBar
 
@@ -124,12 +125,22 @@ class TagView(BasePostsView):
         return posts
 
 
+
 class PostDetail(CommonMixin, DetailView):
     # queryset = Post.latest_posts()
     model = Post
     template_name = "blog/detail.html"
     context_object_name = "post"
     pk_url_kwarg = "post_id"
+
+    def get_context_data(self, **kwargs):
+        """在detail.html末班中拿到comment_form和comment_list变量"""
+        context = super().get_context_data()
+        context.update({
+            "comment_form": CommentForm,
+            "comment_list": Comment.get_by_target(self.request.path)
+        })
+        return context
 
 
 class SearchView(IndexView):
