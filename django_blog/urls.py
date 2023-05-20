@@ -19,6 +19,7 @@ from django.contrib import admin
 # from apps.blog.views import post_list, post_detail
 
 from apps.blog.views import IndexView, CategoryView, TagView, PostDetail, SearchView, AuthorView
+from apps.comment.views import CommentView
 from apps.config.views import LinkListView
 
 urlpatterns = [
@@ -29,6 +30,7 @@ urlpatterns = [
     url(r"^search/$", SearchView.as_view(), name="search"),
     url(r"^author/(?P<owner_id>\d+)/$", AuthorView.as_view(), name="author"),
     url(r"links/$", LinkListView.as_view(), name="links"),
+    url(r"comment/$", CommentView.as_view(), name="comment"),
 
     url(r'^admin/', admin.site.urls, name="admin"),
 ]
