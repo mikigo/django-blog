@@ -72,11 +72,11 @@ class CommonMixin:
         }
 
     def get_context_data(self, **kwargs):
-        side_bars = SideBar.objects.filter(status=1)
+        sidebars = SideBar.objects.filter(status=1)
         recently_posts = Post.objects.filter(status=1)[:10]
         recently_comments = Comment.objects.filter(status=1)[:10]
         kwargs.update({
-            'side_bars': side_bars,
+            'sidebars': sidebars,
             'recently_comments': recently_comments,
             'recently_posts': recently_posts,
         })
@@ -95,7 +95,7 @@ class CommonMixin:
 class BasePostsView(CommonMixin, ListView):
     model = Post
     template_name = 'blog/list.html'
-    context_object_name = 'posts'
+    context_object_name = 'post_list'
     paginate_by = 3
     allow_empty = True
 

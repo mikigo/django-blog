@@ -1,8 +1,6 @@
 {% extends "./base.html" %}
 {% load comment_block %}
-{% block title %}
-    {{ post.title }}
-{% endblock %}
+{% block title %} {{ post.title }} {% endblock %}
 
 {% block extra_head %}
 <link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/googlecode.min.css">
@@ -10,41 +8,22 @@
 <script>hljs.initHighlightingOnLoad();</script>
 {% endblock %}
 
-{% block content %}
-
-    <nav aria-label="breadcrumb" role="navigation">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/">首页</a></li>
-            <li class="breadcrumb-item"><a href="{% url 'category' post.category.id %}">{{ post.category.name }}</a>
-            </li>
-            <li class="breadcrumb-item active" aria-current="page">正文</li>
-        </ol>
-    </nav>
-
-    <div class="post-element">
-        <h3 class="post-element-title">
-            {{ post.title }}
-        </h3>
-        <div>
-            <nav class="nav">
-                分类:<a class="nav-link post-element-nav"
-                      href="{% url 'category' post.category_id %}">{{ post.category.name }}</a>
-                标签:
-                <a class="nav-link post-element-nav" href="#">
-                    {% for tag in post.tags.all %} {{ tag.name }}{% endfor %}
-                </a>
-                作者:<a class="nav-link post-element-nav" href="#">{{ post.owner.username }}</a>
-                创建时间:<a class="nav-link post-element-nav" href="#">{{ post.created_time }}</a>
-            </nav>
-        </div>
-        <article class="content">
-            {% autoescape off %}
-                {{ post.content }}
-            {% endautoescape %}
-        </article>
-
-        {% include 'comment/block.html' %}
+{% block main %}
+    {% if post %}
+    <h1>{{ post.title }}</h1>
+    <div>
+        <span>分类:<a href="{% url 'category' post.category_id %}">{{ post.category.name }}</a></span>
+        <span>作者:<a href="{% url 'author' post.owner_id %}">{{ post.owner.username }}</a></span>
+        <span>创建时间:{{ post.created_time }}</span>
+        <span>pv/uv:{{ post.pv }}/{{ post.uv }}</span>
     </div>
+    <hr/>
+    <p>
+        {% autoescape off %}
+        {{ post.content }}
+        {% endautoescape %}
+    </p>
+    {% endif %}
 
-    {#    {% comment_block request.path %}#}
+    {% comment_block request.path %}
 {% endblock %}
