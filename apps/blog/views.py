@@ -135,7 +135,7 @@ class PostDetail(CommonMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         """在detail.html模板中拿到comment_form和comment_list变量"""
-        context = super().get_context_data()
+        context = super().get_context_data(**kwargs)
         context.update({
             "comment_form": CommentForm,
             "comment_list": Comment.get_by_target(self.request.path)

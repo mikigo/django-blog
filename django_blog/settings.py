@@ -63,7 +63,7 @@ THEME = "default"
 # 首页title
 HOME_TITLE = "django-blog".title()
 # 页面底部 POWER_BY xxx
-POWER_BY = ""
+POWER_BY = "mikgio"
 
 TEMPLATES = [
     {

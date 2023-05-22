@@ -3,9 +3,13 @@
 <div class="comment">
     <form class="form-group" action="/comment/" method="POST">
         {% csrf_token %}
-        <input name="target" type="hidden" value="{{ request.path }}">
+{#        评论所属的文章target,如：post/1.html#}
+        <input name="target" type="hidden" value="{{ target }}">
+{#        评论的其他字段，从comment_block.py过来的#}
         {{ comment_form }}
+        <br>
         <input type="submit" value="写好了！">
+        <hr>
     </form>
     {#        <! -- 评论列表 -->#}
     <ul class="list-group">

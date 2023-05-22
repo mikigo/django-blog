@@ -27,7 +27,7 @@
                 <span class="card-link">
                     标签:
                     {% for tag in post.tag.all %}
-                        <a href="{% url 'tag-list' tag.id %}">{{ tag.name }}</a>
+                        <a href="{% url 'tag' tag.id %}">{{ tag.name }}</a>
                     {% endfor %}
             </span>
                 <hr/>
