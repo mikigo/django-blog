@@ -127,8 +127,8 @@ class TagView(BasePostsView):
 
 
 class PostDetail(CommonMixin, DetailView):
-    # queryset = Post.latest_posts()
-    model = Post
+    queryset = Post.latest_posts()
+    # model = Post
     template_name = "blog/detail.html"
     context_object_name = "post"
     pk_url_kwarg = "post_id"

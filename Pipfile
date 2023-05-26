@@ -13,6 +13,9 @@ django = "*"
 django-simpleui = "*"
 djangorestframework = "*"
 mistune = "*"
+django-ckeditor = "*"
+django-autocomplete-light = "*"
+pillow = "*"
 
 [dev-packages]
 

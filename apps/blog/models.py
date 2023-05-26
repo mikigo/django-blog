@@ -1,3 +1,4 @@
+import mistune
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -73,8 +74,8 @@ class Post(models.Model):
     title = models.CharField(max_length=255, verbose_name="标题")
     desc = models.CharField(max_length=1024, blank=True, verbose_name="摘要")
     content = models.TextField(verbose_name="正文", help_text="正文必须为MarkDown格式")
-    # content_html = models.TextField(verbose_name="正文html代码", blank=True, editable=False)
-
+    content_html = models.TextField(verbose_name="正文html代码", blank=True, editable=False)
+    is_md = models.BooleanField(default=False, verbose_name="markdown语法")
     status = models.PositiveIntegerField(default=STATUS_NORMAL, choices=STATUS_ITEMS, verbose_name="状态")
     category = models.ForeignKey(Category, verbose_name="分类", on_delete=models.CASCADE)
     tag = models.ForeignKey(Tag, verbose_name="标签", on_delete=models.CASCADE)
@@ -92,6 +93,13 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
+    def save(self, *args, **kwargs):
+        if self.is_md:
+            self.content_html = mistune.markdown(self.content)
+        else:
+            self.content_html = self.content
+        super().save(*args, **kwargs)
+
     @classmethod
     def hot_posts(cls):
         return cls.objects.filter(status=cls.STATUS_NORMAL).order_by("-pv")
@@ -105,7 +113,7 @@ class Post(models.Model):
             post_list = []
         else:
             post_list = tag.post_set.filter(status=Post.STATUS_NORMAL).select_related("owner", "category")
-        return post_list.tag
+        return post_list, tag
 
     @staticmethod
     def get_by_category(category_id):
@@ -116,7 +124,7 @@ class Post(models.Model):
             post_list = []
         else:
             post_list = category.post_set.filter(status=Post.STATUS_NORMAL).select_related("owner", "category")
-        return post_list.category
+        return post_list, category
 
     @classmethod
     def latest_posts(cls):

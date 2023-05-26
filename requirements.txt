@@ -4,3 +4,6 @@ django
 django-simpleui
 djangorestframework
 mistune
+django-autocomplete-light
+django-ckeditor
+pillow

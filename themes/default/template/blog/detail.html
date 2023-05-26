@@ -20,10 +20,10 @@
     <hr/>
     <p>
         {% autoescape off %}
-        {{ post.content }}
+        {{ post.content_html }}
         {% endautoescape %}
     </p>
     {% endif %}
 
     {% comment_block request.path %}
-{% endblock %}
+{% endblock %}j

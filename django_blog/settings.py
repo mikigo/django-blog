@@ -39,6 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # 自动补全
+    "dal",
+    "dal_select2",
+    # 富文本编辑
+    "ckeditor",
+    "ckeditor_uploader",
     
     "django_blog",
     "apps.blog",
@@ -69,6 +76,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(BASE_DIR, "themes", THEME, "template")],
+        # 自动查找app中的templates
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -85,6 +93,9 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "themes", THEME, "static"),
 ]
 
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+CKEDITOR_UPLOAD_PATH = "article_images"
 WSGI_APPLICATION = 'django_blog.wsgi.application'
 
 # Database
@@ -153,3 +164,14 @@ SIMPLEUI_HOME_QUICK = True
 SIMPLEUI_HOME_INFO = False
 # 默认主题
 # SIMPLEUI_DEFAULT_THEME = 'admin.lte.css'
+
+CKEDITOR_CONFIGS = {
+    "default": {
+        "toolbar":"full",
+        "height": 400,
+        "width": "full",
+        "tabSpaces": 4,
+        # 代码插件
+        "extraPlugins": "codesnippet",
+    },
+}
