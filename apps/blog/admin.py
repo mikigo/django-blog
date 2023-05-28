@@ -83,7 +83,7 @@ class PostAdmin(BaseOwnerAdmin):
     # 是否展示在底部
     actions_on_bottom = True
     # 保存、编辑、编辑并新建是否在顶部展示
-    # save_on_top = True
+    save_on_top = True
     # 限定要展示的字段，配置展示字段的顺序
     # fields = ("category", "title", "desc", "status", "content", "tag")
     # 控制页面布局
@@ -101,17 +101,21 @@ class PostAdmin(BaseOwnerAdmin):
             "内容", {
                 "fields": (
                     "desc",
-                    "content"
+                    "content",
+                    "content_ck",
+                    "content_md",
+                    "is_md",
                 )
             }
         ),
         (
             "额外信息", {
-                "classes": ("collapse",),
+                "classes": ("wide",),
                 "fields": ("tag",)
             }
         )
     )
+    # filter_vertical = ("tag",)
 
     def operator(self, obj):
         return format_html(
