@@ -3,6 +3,7 @@
 django
 django-simpleui
 djangorestframework
+drf-yasg
 mistune
 django-autocomplete-light
 django-ckeditor

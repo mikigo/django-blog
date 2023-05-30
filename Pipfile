@@ -16,6 +16,7 @@ mistune = "*"
 django-ckeditor = "*"
 django-autocomplete-light = "*"
 pillow = "*"
+drf-yasg = "*"
 
 [dev-packages]
 

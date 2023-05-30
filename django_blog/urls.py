@@ -18,13 +18,35 @@ from django.conf.urls import url
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include
+from django.urls import re_path
+from django.urls import path
+from rest_framework.documentation import include_docs_urls
+from rest_framework.routers import DefaultRouter
+from rest_framework import permissions
+from drf_yasg import openapi
+from drf_yasg.views import get_schema_view
 
+from apps.blog.apis import PostViewSet
 from apps.blog.views import IndexView, CategoryView, TagView, PostDetail, SearchView, AuthorView
 from apps.comment.views import CommentView
 from apps.config.views import LinkListView
 from .autocomplete import CategoryAutocomplete, TagAutocomplete
 
-# from apps.blog.views import post_list, post_detail
+schema_view = get_schema_view(
+    openapi.Info(
+        title=settings.PROJECT_NAME,
+        default_version="v1",
+        description=settings.PROJECT_NAME,
+        terms_of_service="",
+        contact=openapi.Contact(email="xxxxx.com"),
+        license=openapi.License(name="Apache License"),
+    ),
+    public=True,
+    # permission_classes=(permissions.AllowAny,),
+)
+
+router = DefaultRouter()
+router.register(r"post", PostViewSet, basename="api-post")
 
 urlpatterns = [
     url(r"^$", IndexView.as_view(), name="index"),
@@ -36,9 +58,27 @@ urlpatterns = [
     url(r"^links/$", LinkListView.as_view(), name="links"),
     url(r"^comment/$", CommentView.as_view(), name="comment"),
 
+    # api
+    url(r"^api/", include((router.urls, "api"), namespace="api")),
+    # 文档
+    re_path(
+      r"docs(?P<format>\.json|\.yaml)",
+      schema_view.without_ui(cache_timeout=0),
+      name="schema-json",
+    ),
+    path(
+      "docs/",
+      schema_view.with_ui("swagger", cache_timeout=0),
+      name="schema-swagger-ui",
+    ),
+    # path("redoc/", schema_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"),
+
+    # admin
     url(r'^admin/', admin.site.urls, name="admin"),
+
     # 自动补全
     url(r"^category-autocomplete/$", CategoryAutocomplete.as_view(), name="category-autocomplete"),
     url(r"^tag-autocomplete/$", TagAutocomplete.as_view(), name="tag-autocomplete"),
     url(r"^ckeditor/", include("ckeditor_uploader.urls")),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] \
++ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -45,8 +45,11 @@ INSTALLED_APPS = [
     "dal_select2",
     # 富文本编辑
     "ckeditor",
+    # 上传图片
     "ckeditor_uploader",
-    
+    "rest_framework",
+    "drf_yasg",
+
     "django_blog",
     "apps.blog",
     "apps.config",
