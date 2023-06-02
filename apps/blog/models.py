@@ -74,10 +74,6 @@ class Post(models.Model):
     title = models.CharField(max_length=255, verbose_name="标题")
     desc = models.CharField(max_length=1024, blank=True, verbose_name="摘要")
     content = models.TextField(verbose_name="正文", help_text="正文必须为MarkDown格式")
-    # content_html = models.TextField(verbose_name="正文html代码", blank=True, editable=False)
-
-    # 默认使用django-ckeditor,default=False
-    is_md = models.BooleanField(default=False, verbose_name="markdown语法")
     status = models.PositiveIntegerField(default=STATUS_NORMAL, choices=STATUS_ITEMS, verbose_name="状态")
     category = models.ForeignKey(Category, verbose_name="分类", on_delete=models.CASCADE)
     # 一个文章对应多个标签 ManyToManyField
@@ -95,11 +91,6 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
-
-    def save(self, *args, **kwargs):
-        if self.is_md:
-            self.content = mistune.markdown(self.content)
-        super().save(*args, **kwargs)
 
     @classmethod
     def hot_posts(cls):

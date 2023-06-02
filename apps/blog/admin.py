@@ -89,7 +89,7 @@ class PostAdmin(BaseOwnerAdmin):
     # 控制页面布局
     fieldsets = (
         (
-            "基础配置", {
+            "基础信息", {
                 "description": "基础配置描述",
                 "fields": (
                     ("title", "category"),
@@ -98,13 +98,10 @@ class PostAdmin(BaseOwnerAdmin):
             }
         ),
         (
-            "内容", {
+            "内容信息", {
                 "fields": (
                     "desc",
                     "content",
-                    "content_ck",
-                    "content_md",
-                    "is_md",
                 )
             }
         ),
