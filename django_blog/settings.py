@@ -56,6 +56,10 @@ INSTALLED_APPS = [
     "apps.comment",
 
 ]
+REST_FRAMEWORK = {
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
+    "PAGE_SIZE": 2,
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -170,7 +174,7 @@ SIMPLEUI_HOME_INFO = False
 
 CKEDITOR_CONFIGS = {
     "default": {
-        "toolbar":"full",
+        "toolbar": "full",
         "height": 400,
         "width": "full",
         "tabSpaces": 4,

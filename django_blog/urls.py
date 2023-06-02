@@ -26,7 +26,7 @@ from rest_framework import permissions
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 
-from apps.blog.apis import PostViewSet
+from apps.blog.apis import PostViewSet, CategoryViewSet
 from apps.blog.views import IndexView, CategoryView, TagView, PostDetail, SearchView, AuthorView
 from apps.comment.views import CommentView
 from apps.config.views import LinkListView
@@ -47,6 +47,7 @@ schema_view = get_schema_view(
 
 router = DefaultRouter()
 router.register(r"post", PostViewSet, basename="api-post")
+router.register(r"category", CategoryViewSet, basename="api-category")
 
 urlpatterns = [
     url(r"^$", IndexView.as_view(), name="index"),

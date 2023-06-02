@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Post
+from .models import Post, Category, Tag
 
 class PostSerializer(serializers.ModelSerializer):
 
@@ -42,3 +42,9 @@ class PostDetailSerializer(PostSerializer):
             "owner",
             "content",
         ]
+
+class CategorySerialzer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Category
+        fields = ["id", "name", "created_time"]
