@@ -18,6 +18,7 @@ pillow = "*"
 drf-yasg = "*"
 django-mdeditor = "*"
 docutils = "*"
+mdx-include = "*"
 
 [dev-packages]
 

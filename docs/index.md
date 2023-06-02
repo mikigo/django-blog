@@ -1,17 +1,58 @@
-# Welcome to MkDocs
+# django-blog
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+使用 Django 构建的博客系统；
 
-## Commands
+- Django Restframework 构建 RESTful 数据接口；
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
+- drf-yasg 构建在线接口文档；
 
-## Project layout
+- Django 模板引擎渲染前端；
 
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+- Bootstrap 美化前端UI；
+
+- Django SimpleUI 强化后台管理系统；
+
+- mistune 管理 MarkDown 内容；
+
+- django-autocomplete-light 自动补全；
+
+- django-ckeditor 富文本编辑器；
+
+- pillow 处理图片；
+
+---
+
+**Documentation**: <a href="https://funny-test.github.io/django-blog" target="_blank">https://funny-test.github.io/django-blog</a>
+
+**Source Code**: <a href="https://github.com/funny-test/django-blog" target="_blank">https://github.com/funny-test/django-blog</a>
+
+---
+
+## 部署
+
+系统环境：deepin
+
+安装依赖：
+
+```console
+sudo apt install python3-pip
+---> 100%
+pip3 install pipenv
+---> 100%
+cd django-blog/
+---> 100%
+pipenv install
+---> 100%
+```
+
+启动服务：
+
+```console
+pipenv shell
+---> 100%
+python manage.py runserver
+---> 100%
+```
+
+
+
