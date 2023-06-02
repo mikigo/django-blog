@@ -20,7 +20,7 @@
     <hr/>
     <p>
         {% autoescape off %}
-        {{ post.content }}
+        {{ post.content | safe }}
         {% endautoescape %}
     </p>
     {% endif %}

@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from .models import Post, Category, Tag
 
-class PostSerializer(serializers.ModelSerializer):
+class PostSerializer(serializers.HyperlinkedModelSerializer):
 
     category = serializers.SlugRelatedField(
         read_only=True,
@@ -18,10 +18,12 @@ class PostSerializer(serializers.ModelSerializer):
         slug_field="username",
     )
     created_time = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S")
+    url = serializers.HyperlinkedIdentityField(view_name="api-post-detail")
 
     class Meta:
         model = Post
         fields = [
+            "url",
             "id",
             "title",
             "category",
@@ -43,8 +45,14 @@ class PostDetailSerializer(PostSerializer):
             "content",
         ]
 
-class CategorySerialzer(serializers.ModelSerializer):
+class CategorySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Category
+        fields = ["id", "name", "created_time"]
+
+class TagSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Tag
         fields = ["id", "name", "created_time"]

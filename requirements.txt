@@ -6,5 +6,5 @@ djangorestframework
 drf-yasg
 mistune
 django-autocomplete-light
-django-ckeditor
+django-mdeditor
 pillow

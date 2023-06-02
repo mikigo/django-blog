@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "60dd2b2c625d28b9b527523e609317e34f1e0763beb0eb0394dcc42bc33e4762"
+            "sha256": "314789b77cb2cf046b3b328014f07c78bfe161e3f12993a6a2f3e8b391ad79c4"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -148,21 +148,12 @@
             "index": "pypi",
             "version": "==3.9.7"
         },
-        "django-ckeditor": {
+        "django-mdeditor": {
             "hashes": [
-                "sha256:ce0c806e40172dbea35330a207632701a6d418314ae8c8fa140fd277d9322c96",
-                "sha256:e1580105c9ff6fcaca6345acda1dc01416733027c61c6387e02dd5960b8ade3c"
+                "sha256:d1f3b735b6202b8820f10e024a5aa28c5b948897ee7a8dbb84558df75339827e"
             ],
             "index": "pypi",
-            "version": "==6.3.2"
-        },
-        "django-js-asset": {
-            "hashes": [
-                "sha256:86f9f300d682537ddaf0487dc2ab356581b8f50c069bdba91d334a46e449f923",
-                "sha256:adc1ee1efa853fad42054b540c02205344bb406c9bddf87c9e5377a41b7db90f"
-            ],
-            "markers": "python_version >= '3.6'",
-            "version": "==2.0.0"
+            "version": "==0.1.20"
         },
         "django-simpleui": {
             "hashes": [
@@ -178,6 +169,14 @@
             ],
             "index": "pypi",
             "version": "==3.14.0"
+        },
+        "docutils": {
+            "hashes": [
+                "sha256:96f387a2c5562db4476f09f13bbab2192e764cac08ebbf3a34a95d9b1e4a59d6",
+                "sha256:f08a4e276c3a1583a86dce3e34aba3fe04d02bba2dd51ed16106244e8a923e3b"
+            ],
+            "index": "pypi",
+            "version": "==0.20.1"
         },
         "drf-yasg": {
             "hashes": [
@@ -379,11 +378,11 @@
         },
         "ruamel.yaml": {
             "hashes": [
-                "sha256:7e47a3d9ccfa2e41d353e6615661308bcbbc2ebad393bdc13b725bac15baf8a9",
-                "sha256:b73821c1e0a9daa459e215db7c4d6d23d7159fb61c4c536653a2b4fb5b8d08a7"
+                "sha256:098ed1eb6d338a684891a72380277c1e6fc4d4ae0e120de9a447275056dda335",
+                "sha256:3cf153f0047ced526e723097ac615d3009371779432e304dbd5596b6f3a4c777"
             ],
             "markers": "python_version >= '3'",
-            "version": "==0.17.30"
+            "version": "==0.17.31"
         },
         "ruamel.yaml.clib": {
             "hashes": [
@@ -446,11 +445,11 @@
         },
         "typing-extensions": {
             "hashes": [
-                "sha256:06006244c70ac8ee83fa8282cb188f697b8db25bc8b4df07be1873c43897060c",
-                "sha256:3a8b36f13dd5fdc5d1b16fe317f5668545de77fa0b8e02006381fd49d731ab98"
+                "sha256:88a4153d8505aabbb4e13aacb7c486c2b4a33ca3b3f807914a9b4c844c471c26",
+                "sha256:d91d5919357fe7f681a9f2b5b4cb2a5f1ef0a1e9f59c4d8ff0d3491e05c0ffd5"
             ],
             "markers": "python_version < '3.11'",
-            "version": "==4.6.2"
+            "version": "==4.6.3"
         },
         "uritemplate": {
             "hashes": [

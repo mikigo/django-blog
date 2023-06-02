@@ -1,4 +1,4 @@
-from ckeditor_uploader.widgets import CKEditorUploadingWidget
+from mdeditor.fields import MDTextFormField
 from dal import autocomplete
 from django import forms
 
@@ -18,8 +18,7 @@ class PostAdminForm(forms.ModelForm):
     )
 
     desc = forms.CharField(widget=forms.Textarea(), label="摘要", required=False)
-    # django-ckeditor 可以上传图片
-    content = forms.CharField(widget=CKEditorUploadingWidget(), label="正文(ckeditor)", required=False)
+    content = MDTextFormField(label="正文", required=False)
 
     class Meta:
         model = Post

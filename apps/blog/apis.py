@@ -1,7 +1,7 @@
 from rest_framework import viewsets
 
-from .models import Post,Category
-from .serializer import PostSerializer, PostDetailSerializer, CategorySerialzer
+from .models import Post, Category, Tag
+from .serializer import PostSerializer, PostDetailSerializer, CategorySerializer, TagSerializer
 
 # class PostViewSet(viewsets.ModelViewSet):
 # 没有从前端写入的需求，ReadOnlyModelViewSet
@@ -22,4 +22,8 @@ class PostViewSet(viewsets.ReadOnlyModelViewSet):
 
 class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Category.objects.filter(status=Category.STATUS_NORMAL)
-    serializer_class = CategorySerialzer
+    serializer_class = CategorySerializer
+
+class TagViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Tag.objects.filter(status=Tag.STATUS_NORMAL)
+    serializer_class = TagSerializer

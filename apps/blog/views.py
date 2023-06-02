@@ -10,54 +10,10 @@ from apps.comment.models import Comment
 from apps.config.models import SideBar
 
 
-# def post_list(request, category_id=None, tag_id=None):
-#     tag = None
-#     category = None
-#
-#     if tag_id:
-#         post_list, tag = Post.get_by_tag(tag_id)
-#     elif category_id:
-#         post_list, category = Post.get_by_category(category_id)
-#     else:
-#         post_list = Post.latest_posts()
-#
-#     context = {
-#         "category": category,
-#         "tag": tag,
-#         "post_list": post_list,
-#         "sidebars": SideBar.get_all(),
-#     }
-#     # 把所有分类加进来
-#     context.update(Category.get_navs())
-#
-#     return render(
-#         request,
-#         "blog/list.html",
-#         context=context
-#     )
-#
-#
-# def post_detail(request, post_id):
-#     try:
-#         post = Post.objects.get(id=post_id)
-#     except Post.DoesNotExist:
-#         post = None
-#
-#     context = {
-#         "post": post,
-#         "sidebars": SideBar.get_all(),
-#     }
-#     return render(
-#         request,
-#         "blog/detail.html",
-#         context=context
-#     )
-
-
 class CommonMixin:
 
     def get_category_context(self):
-        categories = Category.objects.filter(status=1)  # TODO: fix magic number
+        categories = Category.objects.filter(status=1)
 
         nav_cates = []
         cates = []

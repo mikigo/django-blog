@@ -68,7 +68,7 @@ class CategoryOwnerFilter(admin.SimpleListFilter):
 @admin.register(Post)
 class PostAdmin(BaseOwnerAdmin):
     # 文章描述字段能够以 textarea（多行多列） 展示
-    form = PostAdminForm
+    # form = PostAdminForm
     # 配置列表页面展示哪些字段
     list_display = ("title", "category", "status", "created_time", "owner", "operator")
     # 配置哪些字段可以作为链接，点击他们，可以进入编辑页面，如果设置为None，表示不配置任何可点击的字段
