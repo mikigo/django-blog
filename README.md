@@ -22,9 +22,9 @@
 
 ---
 
-**Documentation**: <a href="https://funny-test.github.io/django-blog" target="_blank">https://funny-test.github.io/django-blog</a>
+**Documentation**: <a href="https://funny-dream.github.io/django-blog" target="_blank">https://funny-dream.github.io/django-blog</a>
 
-**Source Code**: <a href="https://github.com/funny-test/django-blog" target="_blank">https://github.com/funny-test/django-blog</a>
+**Source Code**: <a href="https://github.com/funny-dream/django-blog" target="_blank">https://github.com/funny-dream/django-blog</a>
 
 ---
 
