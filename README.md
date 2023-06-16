@@ -35,18 +35,39 @@
 安装依赖：
 
 ```shell
+# 安装 pip3
 sudo apt install python3-pip
+# 安装 pipenv
 pip3 install pipenv
+# 进入工程目录
 cd django-blog/
+# 安装环境依赖
 pipenv install
 ```
 
 启动服务：
 
 ```shell
+# 进入虚拟环境
 pipenv shell
+# 启动服务
 python manage.py runserver
 ```
 
+## 效果示意
 
+首页
 
+![](./docs/img/home.png)
+
+博客详情：
+
+![](./docs/img/detail.png)
+
+后台管理：
+
+![](./docs/img/admin.png)
+
+后台管理支持markdown编辑：
+
+![](./docs/img/admin_md.png)
