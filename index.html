@@ -292,6 +292,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    效果示意
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -329,6 +336,13 @@
         <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
     部署
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    效果示意
   </a>
   
 </li>
@@ -389,27 +403,30 @@
 <h2 id="_1">部署</h2>
 <p>系统环境：deepin</p>
 <p>安装依赖：</p>
-<p>
-<div class="termy" data-termynal>
-<span data-ty>sudo apt install python3-pip</span>
-<span data-ty="progress"></span>
-<span data-ty>pip3 install pipenv</span>
-<span data-ty="progress"></span>
-<span data-ty>cd django-blog/</span>
-<span data-ty="progress"></span>
-<span data-ty>pipenv install</span>
-<span data-ty="progress"></span>
-<span data-ty></span>
-</div></p>
+<pre><code class="language-shell"># 安装 pip3
+sudo apt install python3-pip
+# 安装 pipenv
+pip3 install pipenv
+# 进入工程目录
+cd django-blog/
+# 安装环境依赖
+pipenv install
+</code></pre>
 <p>启动服务：</p>
-<p>
-<div class="termy" data-termynal>
-<span data-ty>pipenv shell</span>
-<span data-ty="progress"></span>
-<span data-ty>python manage.py runserver</span>
-<span data-ty="progress"></span>
-<span data-ty></span>
-</div></p>
+<pre><code class="language-shell"># 进入虚拟环境
+pipenv shell
+# 启动服务
+python manage.py runserver
+</code></pre>
+<h2 id="_2">效果示意</h2>
+<p>首页</p>
+<p><img alt="" src="img/home.png" /></p>
+<p>博客详情：</p>
+<p><img alt="" src="img/detail.png" /></p>
+<p>后台管理：</p>
+<p><img alt="" src="img/admin.png" /></p>
+<p>后台管理支持markdown编辑：</p>
+<p><img alt="" src="img/admin_md.png" /></p>
 
 
   
