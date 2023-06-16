@@ -56,7 +56,7 @@ python manage.py runserver
 
 ## 效果示意
 
-首页
+首页地址：127.0.0.1:8000
 
 ![](./docs/img/home.png)
 
@@ -64,7 +64,13 @@ python manage.py runserver
 
 ![](./docs/img/detail.png)
 
-后台管理：
+后台管理地址：127.0.0.1:8000/admin
+
+后台管理系统默认管理员用户
+
+用户名：mikigo
+
+密码：123456
 
 ![](./docs/img/admin.png)
 

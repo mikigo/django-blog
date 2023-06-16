@@ -56,7 +56,7 @@ python manage.py runserver
 
 ## 效果示意
 
-首页
+首页地址：127.0.0.1:8000
 
 ![](./img/home.png)
 
@@ -64,10 +64,20 @@ python manage.py runserver
 
 ![](./img/detail.png)
 
-后台管理：
+后台管理地址：127.0.0.1:8000/admin
+
+后台管理系统默认管理员用户
+
+用户名：mikigo
+
+密码：123456
 
 ![](./img/admin.png)
 
 后台管理支持markdown编辑：
 
 ![](./img/admin_md.png)
+
+## 后记
+
+这是一个UI上相对“简陋”的博客系统，但功能整体是可用的，奈何在下前端水平一般，所以开源出来，希望大哥们能多多指点，也欢迎大家在此基础上进行二次开发。
