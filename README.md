@@ -22,9 +22,9 @@
 
 ---
 
-**Documentation**: <a href="https://funny-dream.github.io/django-blog" target="_blank">https://funny-dream.github.io/django-blog</a>
+**Documentation**: <a href="https://mikigo.github.io/django-blog" target="_blank">https://mikigo.github.io/django-blog</a>
 
-**Source Code**: <a href="https://github.com/funny-dream/django-blog" target="_blank">https://github.com/funny-dream/django-blog</a>
+**Source Code**: <a href="https://github.com/mikigo/django-blog" target="_blank">https://github.com/mikigo/django-blog</a>
 
 ---
 
