@@ -17,7 +17,7 @@ SECRET_KEY = '%=wx)hfh(xgo_)d^2%#+s!vjre(o8h7*d*s(oz)ij8dveeen5u'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-PROJECT_NAME = "django-blog"
+PROJECT_NAME = "mkblog"
 
 DATABASES = {
     'default': {
@@ -26,7 +26,7 @@ DATABASES = {
     }
 }
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
@@ -74,7 +74,7 @@ ROOT_URLCONF = 'django_blog.urls'
 # 主题
 THEME = "default"
 # 首页title
-HOME_TITLE = "django-blog".title()
+HOME_TITLE = "MkBlog"
 # 页面底部 POWER_BY xxx
 POWER_BY = "mikgio"
 

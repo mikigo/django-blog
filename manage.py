@@ -6,6 +6,7 @@ if __name__ == "__main__":
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "django_blog.settings")
     try:
         from django.core.management import execute_from_command_line
+        from django.core.management.commands.runserver import Command
     except ImportError:
         # The above import may fail for some other reason. Ensure that the
         # issue is really that Django is missing to avoid masking other
@@ -19,4 +20,6 @@ if __name__ == "__main__":
                 "forget to activate a virtual environment?"
             )
         raise
+    Command.default_port = "5555"
+    Command.default_addr = "0.0.0.0"
     execute_from_command_line(sys.argv)
