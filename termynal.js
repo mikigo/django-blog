@@ -1,16 +1,5 @@
-/**
- * termynal.js
- * A lightweight, modern and extensible animated terminal window, using
- * async/await.
- *
- * @author Ines Montani <ines@ines.io>
- * @version 0.0.1
- * @license MIT
- */
-
 'use strict';
 
-/** Generate a terminal widget. */
 class Termynal {
     /**
      * Construct the widget's settings.
@@ -22,7 +11,7 @@ class Termynal {
      * @param {number} options.lineDelay - Delay between each line, in ms.
      * @param {number} options.progressLength - Number of characters displayed as progress bar.
      * @param {string} options.progressChar – Character to use for progress bar, defaults to █.
-	 * @param {number} options.progressPercent - Max percent of progress.
+     * @param {number} options.progressPercent - Max percent of progress.
      * @param {string} options.cursor – Character to use for cursor, defaults to ▋.
      * @param {Object[]} lineData - Dynamically loaded line data objects.
      * @param {boolean} options.noInit - Don't initialise the animation.
@@ -30,31 +19,48 @@ class Termynal {
     constructor(container = '#termynal', options = {}) {
         this.container = (typeof container === 'string') ? document.querySelector(container) : container;
         this.pfx = `data-${options.prefix || 'ty'}`;
-        this.startDelay = options.startDelay
+        this.originalStartDelay = this.startDelay = options.startDelay
             || parseFloat(this.container.getAttribute(`${this.pfx}-startDelay`)) || 600;
-        this.typeDelay = options.typeDelay
+        this.originalTypeDelay = this.typeDelay = options.typeDelay
             || parseFloat(this.container.getAttribute(`${this.pfx}-typeDelay`)) || 90;
-        this.lineDelay = options.lineDelay
+        this.originalLineDelay = this.lineDelay = options.lineDelay
             || parseFloat(this.container.getAttribute(`${this.pfx}-lineDelay`)) || 1500;
         this.progressLength = options.progressLength
             || parseFloat(this.container.getAttribute(`${this.pfx}-progressLength`)) || 40;
         this.progressChar = options.progressChar
             || this.container.getAttribute(`${this.pfx}-progressChar`) || '█';
-		this.progressPercent = options.progressPercent
+        this.progressPercent = options.progressPercent
             || parseFloat(this.container.getAttribute(`${this.pfx}-progressPercent`)) || 100;
         this.cursor = options.cursor
             || this.container.getAttribute(`${this.pfx}-cursor`) || '▋';
         this.lineData = this.lineDataToElements(options.lineData || []);
+        this.loadLines()
         if (!options.noInit) this.init()
+    }
+
+    loadLines() {
+        // Load all the lines and create the container so that the size is fixed
+        // Otherwise it would be changing and the user viewport would be constantly
+        // moving as she/he scrolls
+        const finish = this.generateFinish()
+        finish.style.visibility = 'hidden'
+        this.container.appendChild(finish)
+        // Appends dynamically loaded lines to existing line elements.
+        this.lines = [...this.container.querySelectorAll(`[${this.pfx}]`)].concat(this.lineData);
+        for (let line of this.lines) {
+            line.style.visibility = 'hidden'
+            this.container.appendChild(line)
+        }
+        const restart = this.generateRestart()
+        restart.style.visibility = 'hidden'
+        this.container.appendChild(restart)
+        this.container.setAttribute('data-termynal', '');
     }
 
     /**
      * Initialise the widget, get lines, clear container and start animation.
      */
     init() {
-        // Appends dynamically loaded lines to existing line elements.
-        this.lines = [...this.container.querySelectorAll(`[${this.pfx}]`)].concat(this.lineData);
-
         /**
          * Calculates width and height of Termynal container.
          * If container is empty and lines are dynamically loaded, defaults to browser `auto` or CSS.
@@ -67,6 +73,9 @@ class Termynal {
 
         this.container.setAttribute('data-termynal', '');
         this.container.innerHTML = '';
+        for (let line of this.lines) {
+            line.style.visibility = 'visible'
+        }
         this.start();
     }
 
@@ -74,6 +83,7 @@ class Termynal {
      * Start the animation and rener the lines depending on their data attributes.
      */
     async start() {
+        this.addFinish()
         await this._wait(this.startDelay);
 
         for (let line of this.lines) {
@@ -98,6 +108,47 @@ class Termynal {
 
             line.removeAttribute(`${this.pfx}-cursor`);
         }
+        this.addRestart()
+        this.finishElement.style.visibility = 'hidden'
+        this.lineDelay = this.originalLineDelay
+        this.typeDelay = this.originalTypeDelay
+        this.startDelay = this.originalStartDelay
+    }
+
+    generateRestart() {
+        const restart = document.createElement('button')
+        restart.onclick = (e) => {
+            e.preventDefault()
+            this.container.innerHTML = ''
+            this.init()
+        }
+        restart.setAttribute('data-terminal-control', '')
+        restart.innerHTML = "restart ↻"
+        return restart
+    }
+
+    generateFinish() {
+        const finish = document.createElement('button')
+        finish.onclick = (e) => {
+            e.preventDefault()
+            this.lineDelay = 0
+            this.typeDelay = 0
+            this.startDelay = 0
+        }
+        finish.setAttribute('data-terminal-control', '')
+        finish.innerHTML = "fast →"
+        this.finishElement = finish
+        return finish
+    }
+
+    addRestart() {
+        const restart = this.generateRestart()
+        this.container.appendChild(restart)
+    }
+
+    addFinish() {
+        const finish = this.generateFinish()
+        this.container.appendChild(finish)
     }
 
     /**
@@ -106,11 +157,11 @@ class Termynal {
      */
     async type(line) {
         const chars = [...line.textContent];
-        const delay = line.getAttribute(`${this.pfx}-typeDelay`) || this.typeDelay;
         line.textContent = '';
         this.container.appendChild(line);
 
         for (let char of chars) {
+            const delay = line.getAttribute(`${this.pfx}-typeDelay`) || this.typeDelay;
             await this._wait(delay);
             line.textContent += char;
         }
@@ -126,8 +177,8 @@ class Termynal {
         const progressChar = line.getAttribute(`${this.pfx}-progressChar`)
             || this.progressChar;
         const chars = progressChar.repeat(progressLength);
-		const progressPercent = line.getAttribute(`${this.pfx}-progressPercent`)
-			|| this.progressPercent;
+        const progressPercent = line.getAttribute(`${this.pfx}-progressPercent`)
+            || this.progressPercent;
         line.textContent = '';
         this.container.appendChild(line);
 
@@ -135,9 +186,9 @@ class Termynal {
             await this._wait(this.typeDelay);
             const percent = Math.round(i / chars.length * 100);
             line.textContent = `${chars.slice(0, i)} ${percent}%`;
-			if (percent>progressPercent) {
-				break;
-			}
+            if (percent > progressPercent) {
+                break;
+            }
         }
     }
 
@@ -174,12 +225,15 @@ class Termynal {
     _attributes(line) {
         let attrs = '';
         for (let prop in line) {
-            attrs += this.pfx;
-
+            // Custom add class
+            if (prop === 'class') {
+                attrs += ` class=${line[prop]} `
+                continue
+            }
             if (prop === 'type') {
-                attrs += `="${line[prop]}" `
+                attrs += `${this.pfx}="${line[prop]}" `
             } else if (prop !== 'value') {
-                attrs += `-${prop}="${line[prop]}" `
+                attrs += `${this.pfx}-${prop}="${line[prop]}" `
             }
         }
 
@@ -197,12 +251,12 @@ if (document.currentScript.hasAttribute('data-termynal-container')) {
 }
 
 
-(function(){
+(function () {
     document
-    .querySelectorAll('.termy')
-    .forEach(node => {
-        new Termynal(node, {
-            lineDelay: 500
+        .querySelectorAll('.termy')
+        .forEach(node => {
+            new Termynal(node, {
+                lineDelay: 500
+            });
         });
-    });
 })()
